@@ -14,7 +14,7 @@ blueprint:
       description: The ecobee thermostat entity
       selector:
         entity:
-          domain: climate
+          device_class: climate
     speaker_target:
       name: Speaker
       description: Entity to announce event on (choose an Entity, not a Device!)
@@ -46,16 +46,17 @@ blueprint:
 
 mode: single
 
-condition: state
-  entity_id: !input climate_entity
-  attribute: fan
-  state: 'on'
-
 trigger:
   platform: state
   entity_id: !input door_entity
   from: "off"
   to: "on"
+
+condition:
+  - condition: state
+    entity_id: !input climate_entity
+    attribute: fan
+    state: 'on'
 
 action:
   - delay: !input initial_delay 
