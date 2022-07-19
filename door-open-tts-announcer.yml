@@ -47,8 +47,8 @@ trigger:
   to: "on"
 
 action:
+  - delay: !input initial_delay 
   - alias: Repeat the sequence UNTIL the door is closed
-    delay: !input initial_delay 
     repeat:
       sequence:
         - delay: !input cooldown 
