@@ -21,7 +21,7 @@ blueprint:
       description: What to say when door is left open
     initial_delay:
       name: Initial delay
-      description: Time before first announcement
+      description: Time before first announcement (in addition to repetition time)
       default: 10
       selector:
         number:
