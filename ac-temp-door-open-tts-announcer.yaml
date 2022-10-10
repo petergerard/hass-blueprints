@@ -15,6 +15,12 @@ blueprint:
       selector:
         entity:
           domain: climate
+    weather_entity:
+      name: Weather Entity
+      description: The source of outside temperature
+      selector:
+        entity:
+          domain: weather
     minimum_temperature:
       name: Minimum Temperature
       description: Min temp
@@ -79,12 +85,13 @@ condition:
       attribute: fan
       state: 'on'
     - condition: numeric_state
-      entity_id: sensor.weather_temperature
+      entity_id: !input weather_entity
+      attribute: temperature
       below: !input minimum_temperature
     - condition: numeric_state
-      entity_id: sensor.weather_temperature
+      entity_id: !input weather_entity
+      attribute: temperature
       above: !input maximum_temperature
-      
       
 
 action:
