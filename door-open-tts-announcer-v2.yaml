@@ -24,10 +24,8 @@ blueprint:
       description: Time before first announcement (in addition to repetition time)
       default: 10
       selector:
-        number:
-          min: 0
-          max: 600
-          unit_of_measurement: seconds
+        duration:
+          enable_days: false
     cooldown:
       name: Announcement repetition frequency
       description: Time between repeated announcements (and after initial delay)
