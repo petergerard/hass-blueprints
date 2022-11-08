@@ -1,5 +1,5 @@
 blueprint:
-  name: Door open TTS announcer with initial delay and climate+temp status check
+  name: Door open TTS announcer with climate+temp status check & initial delay
   domain: automation
   input:
     door_entity:
