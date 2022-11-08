@@ -1,5 +1,5 @@
 blueprint:
-  name: Door open TTS announcer with initial delay and climate+temp status check
+  name: Door open TTS announcer with initial delay v3
   domain: automation
   input:
     door_entity:
@@ -9,36 +9,6 @@ blueprint:
         entity:
           domain: binary_sensor
           device_class: door
-    climate_entity:
-      name: Thermostat Entity
-      description: The ecobee thermostat entity
-      selector:
-        entity:
-          domain: climate
-    weather_entity:
-      name: Weather Entity
-      description: The source of outside temperature
-      selector:
-        entity:
-          domain: weather
-    minimum_temperature:
-      name: Minimum Temperature
-      description: Min temp
-      default: 68
-      selector:
-        number:
-          min: 0
-          max: 90
-          unit_of_measurement: degrees
-    maximum_temperature:
-      name: Maximum Temperature
-      description: Max temp
-      default: 78
-      selector:
-        number:
-          min: 0
-          max: 90
-          unit_of_measurement: degrees
     speaker_target:
       name: Speaker
       description: Entity to announce event on (choose an Entity, not a Device!)
@@ -51,8 +21,8 @@ blueprint:
       description: What to say when door is left open
     initial_delay:
       name: Initial delay
-      description: Time before first announcement (in addition to repetition time)
-      default: 10
+      description: Time before first announcement
+      default: 60s
       selector:
         duration:
           enable_days: false
@@ -75,28 +45,10 @@ trigger:
   to: "on"
   for: !input initial_delay 
 
-condition:
-  alias: "Heat pump on or temp outside range"
-  or:
-    - condition: state
-      entity_id: !input climate_entity
-      attribute: fan
-      state: 'on'
-    - condition: numeric_state
-      entity_id: !input weather_entity
-      attribute: temperature
-      below: !input minimum_temperature
-    - condition: numeric_state
-      entity_id: !input weather_entity
-      attribute: temperature
-      above: !input maximum_temperature
-      
-# TODO try delay at end of sequence
 action:
   - alias: Repeat the sequence UNTIL the door is closed
     repeat:
       sequence:
-        - delay: !input cooldown 
         - condition: state
           entity_id: !input door_entity
           state: 'on'
@@ -104,6 +56,7 @@ action:
           target: !input speaker_target
           data:
             message: !input announcement_message
+        - delay: !input cooldown 
       until:
         - condition: state
           entity_id: !input door_entity
