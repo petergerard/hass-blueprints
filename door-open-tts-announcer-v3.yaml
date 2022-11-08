@@ -22,7 +22,7 @@ blueprint:
     initial_delay:
       name: Initial delay
       description: Time before first announcement
-      default: 60s
+      default: 60
       selector:
         duration:
           enable_days: false
