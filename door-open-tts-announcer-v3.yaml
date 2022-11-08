@@ -22,17 +22,17 @@ blueprint:
     initial_delay:
       name: Initial delay
       description: Time before first announcement
+      selector:
+        duration:
+          enable_day: false
       default:
         hours: 0
         minutes: 0
         seconds: 60
-      selector:
-        duration:
-          enable_day: false
     cooldown:
       name: Announcement repetition frequency
       description: Time between repeated announcements
-      default: 10
+      default: 30
       selector:
         number:
           min: 0
