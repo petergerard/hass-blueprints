@@ -49,20 +49,24 @@ blueprint:
     announcement_message:
       name: Announcement message
       description: What to say when door is left open
+      default: The door has been left open
     initial_delay:
       name: Initial delay
-      description: Time before first announcement (in addition to repetition time)
-      default: 10
+      description: Time before first announcement
       selector:
         duration:
-          enable_days: false
+          enable_day: false
+      default:
+        hours: 0
+        minutes: 0
+        seconds: 60
     cooldown:
       name: Announcement repetition frequency
       description: Time between repeated announcements
-      default: 10
+      default: 30
       selector:
         number:
-          min: 0
+          min: 15
           max: 600
           unit_of_measurement: seconds
 
@@ -96,7 +100,6 @@ action:
   - alias: Repeat the sequence UNTIL the door is closed
     repeat:
       sequence:
-        - delay: !input cooldown 
         - condition: state
           entity_id: !input door_entity
           state: 'on'
@@ -104,6 +107,7 @@ action:
           target: !input speaker_target
           data:
             message: !input announcement_message
+        - delay: !input cooldown 
       until:
         - condition: state
           entity_id: !input door_entity

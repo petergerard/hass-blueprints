@@ -1,5 +1,5 @@
 blueprint:
-  name: Door open TTS announcer with initial delay v3
+  name: Door open TTS announcer with initial delay
   domain: automation
   input:
     door_entity:
@@ -19,6 +19,7 @@ blueprint:
     announcement_message:
       name: Announcement message
       description: What to say when door is left open
+      default: The door has been left open
     initial_delay:
       name: Initial delay
       description: Time before first announcement
@@ -35,7 +36,7 @@ blueprint:
       default: 30
       selector:
         number:
-          min: 0
+          min: 15
           max: 600
           unit_of_measurement: seconds
 
