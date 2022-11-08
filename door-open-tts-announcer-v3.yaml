@@ -25,7 +25,7 @@ blueprint:
       default: 60
       selector:
         duration:
-          enable_days: false
+          enable_day: false
     cooldown:
       name: Announcement repetition frequency
       description: Time between repeated announcements
