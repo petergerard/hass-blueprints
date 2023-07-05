@@ -56,9 +56,10 @@ action:
         - condition: state
           entity_id: !input door_entity
           state: 'on'
-        - service: tts.google_translate_say
-          target: !input speaker_target
+        - service: tts.speak
+          target: tts.google_en_com # TODO perhaps makes this configurable
           data:
+            media_player_entity_id: !input speaker_target
             message: !input announcement_message
         - delay: !input cooldown 
       until:
