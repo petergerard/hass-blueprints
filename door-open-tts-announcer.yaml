@@ -57,8 +57,10 @@ action:
           entity_id: !input door_entity
           state: 'on'
         - service: tts.speak
-          target: tts.google_en_com # TODO perhaps makes this configurable
+          target:
+            entity_id: tts.google_en_com
           data:
+            cache: true
             media_player_entity_id: !input speaker_target
             message: !input announcement_message
         - delay: !input cooldown 
