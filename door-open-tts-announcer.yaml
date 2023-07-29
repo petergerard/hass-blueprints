@@ -11,11 +11,11 @@ blueprint:
           device_class: door
     speaker_target:
       name: Speaker
-      description: Entity to announce event on (choose an Entity, not a Device!)
+      description: Media player entity to announce event on
       selector:
-        target:
-          entity:
-            domain: media_player
+        entity:
+          filter:
+            - domain: media_player
     announcement_message:
       name: Announcement message
       description: What to say when door is left open
