@@ -6,12 +6,12 @@ blueprint:
   input:
     zooz_switch:
       name: Zooz Switch
-      description: List of available Zooz ZEN32 switches.
+      description: Select a ZEN32 Switch!
       selector:
         device:
           integration: zwave_js
           manufacturer: Zooz
-          model: ZEN32
+          # model: ZEN32
     target_light:
       name: Light
       description: The light to link to button
